@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Categorie{% endblock %}
+
+{% block body %}
+
+<article class="container">
+<img src="/images/Capture.jpg" alt="Car" style="width:100%">
+  <p>A car is a wheeled, self-powered motor vehicle used for transportation. Most definitions of the term specify that cars are designed to run primarily on roads. (Wikipedia)</p>
+</article>
+
+
+<div class="container">
+
+    <h1 class="text-center py-3 text-marron">{{ categorie.nom}}</h1>
+
+    <div class="row">
+        {% for produit in categorie.produits%}
+
+        <div class="col-md-3">
+             <div class="card m-2" style="width: 17rem;">
+                <h5 class="card-title">{{ produit.marque }}</h5>
+                <h6 class="card-title">{{ produit.designation }}</h6>
+                 <img  src="images/{{ produit.image }}" class="card-img-top" alt="..." style="width: 70px; height:auto">
+                <div class="card-body">
+                  <h6 class="card-title">{{ produit.prix}}</h6>
+                  <h6 class="card-title">{{ produit.disponible ? 'Yes' : 'No' }}</h6>
+        
+                  <a href="#" class="btn btn-secondary">En savoir plus</a>
+                  <a href="#" class="btn btn-primary">Ajouter au panier</a>
+                </div>
+              </div>
+        </div>
+        
+        <br><br>
+        
+        {% endfor %}
+        </div>
+
+  
+
+    <a href="{{ path('categorie_index') }}">back to list</a>
+
+    <a href="{{ path('categorie_edit', {'id': categorie.id}) }}">edit</a>
+
+
+    {{ include('categorie/_delete_form.html.twig') }}
+</div>
+
+
+{% endblock %}
